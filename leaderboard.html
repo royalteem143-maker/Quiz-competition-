@@ -2,27 +2,22 @@
 <html>
 <head>
   <title>Leaderboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="card">
-  <h2>🏆 Live Leaderboard</h2>
-
-  <table style="width:100%;margin-top:15px;color:#fff;">
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>DOB</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody id="board"></tbody>
-  </table>
-</div>
-
-<script src="leaderboard.js"></script>
+  <div class="box">
+    <h2>Leaderboard</h2>
+    <ul id="list"></ul>
+  </div>
+<script>
+const lb=JSON.parse(localStorage.getItem("lb")||"[]");
+const ul=document.getElementById("list");
+lb.sort((a,b)=>b.score-a.score);
+lb.forEach(x=>{
+  let li=document.createElement("li");
+  li.innerText=`${x.name} - ${x.score}`;
+  ul.appendChild(li);
+});
+</script>
 </body>
 </html>
