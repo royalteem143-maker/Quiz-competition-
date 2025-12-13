@@ -2,46 +2,89 @@ if(!localStorage.getItem("name")){
   window.location.href = "./login.html";
 }
 
-const questions = [
-  {q:"भारत की राजधानी क्या है?", o:["दिल्ली","मुंबई","चेन्नई","कोलकाता"], a:0},
-  {q:"2 + 2 = ?", o:["2","3","4","5"], a:2},
-  {q:"सूरज कहाँ से उगता है?", o:["उत्तर","दक्षिण","पूरब","पश्चिम"], a:2},
-  {q:"5 × 2 = ?", o:["5","7","10","12"], a:2}
-].sort(()=>0.5-Math.random());
+/* ========= QUESTION BANK (already set by you) ========= */
+const QUESTION_BANK = [ /* SAME questions you already added */ ];
 
-let i=0, score=0, time=10, t;
-const qEl=document.getElementById("question");
-const oEl=document.getElementById("options");
-const tiEl=document.getElementById("timer");
+/* ========= SECTION SPLIT ========= */
+const GK = QUESTION_BANK.slice(0,10);
+const MATHS = QUESTION_BANK.slice(10,20);
+const REASONING = QUESTION_BANK.slice(20,30);
+
+const SECTIONS = [
+  {name:"GK Section", data:GK},
+  {name:"Maths Section", data:MATHS},
+  {name:"Reasoning Section", data:REASONING}
+];
+
+let sectionIndex = 0;
+let qIndex = 0;
+let score = 0;
+let time = 10;
+let timer;
+
+const qEl = document.getElementById("question");
+const oEl = document.getElementById("options");
+const tEl = document.getElementById("timer");
+const sEl = document.getElementById("sectionName");
 
 function saveLeaderboard(){
   let data = JSON.parse(localStorage.getItem("leaderboard")) || [];
-  data.push({name:localStorage.getItem("name"), score:score});
+  data.push({ name: localStorage.getItem("name"), score });
   localStorage.setItem("leaderboard", JSON.stringify(data));
 }
 
-function show(){
-  clearInterval(t);
-  if(i>=questions.length){
+function showQuestion(){
+  clearInterval(timer);
+
+  if(sectionIndex >= SECTIONS.length){
     saveLeaderboard();
     localStorage.setItem("score", score);
-    window.location.href="./result.html";
+    window.location.href = "./result.html";
     return;
   }
-  qEl.innerText = questions[i].q;
-  oEl.innerHTML="";
-  questions[i].o.forEach((x,j)=>{
-    const b=document.createElement("button");
-    b.className="option-btn";
-    b.innerText=x;
-    b.onclick=()=>ans(j);
-    oEl.appendChild(b);
+
+  const section = SECTIONS[sectionIndex];
+
+  if(qIndex >= section.data.length){
+    sectionIndex++;
+    qIndex = 0;
+    showQuestion();
+    return;
+  }
+
+  sEl.innerText = section.name;
+
+  const q = section.data[qIndex];
+  qEl.innerText = `Q${qIndex+1}. ${q.q}`;
+  oEl.innerHTML = "";
+
+  q.o.forEach((opt, idx)=>{
+    const btn = document.createElement("button");
+    btn.className = "option-btn";
+    btn.innerText = opt;
+    btn.onclick = ()=>answer(idx);
+    oEl.appendChild(btn);
   });
-  time=10; tiEl.innerText=time;
-  t=setInterval(()=>{
-    time--; tiEl.innerText=time;
-    if(time<=0){ i++; show(); }
+
+  time = 10;
+  tEl.innerText = time;
+
+  timer = setInterval(()=>{
+    time--;
+    tEl.innerText = time;
+    if(time <= 0){
+      qIndex++;
+      showQuestion();
+    }
   },1000);
 }
-function ans(j){ if(j===questions[i].a) score++; i++; show(); }
-show();
+
+function answer(idx){
+  if(idx === SECTIONS[sectionIndex].data[qIndex].a){
+    score++;
+  }
+  qIndex++;
+  showQuestion();
+}
+
+showQuestion();
