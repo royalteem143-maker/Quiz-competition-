@@ -1,28 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="center">
+
+<div class="card">
+  <h2>Student Login</h2>
+
+  <input id="name" placeholder="Full Name">
+  <input id="email" placeholder="Email">
+
+  <label>
+    <input type="checkbox" id="agree">
+    I agree to Terms
+  </label>
+
+  <button onclick="login()">Start</button>
+</div>
+
 <script>
 function login(){
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const agree = document.getElementById("agree").checked;
 
-  if(name==="" || email===""){
+  if(!name || !email){
     alert("Fill all details"); return;
   }
   if(!agree){
-    alert("Accept Terms & Conditions"); return;
+    alert("Accept terms"); return;
   }
 
-  const today = new Date().toDateString();
-  const lastPlay = localStorage.getItem("played_"+email);
-
-  if(lastPlay === today){
-    alert("You have already played today's quiz");
-    return;
+  if(localStorage.getItem("played_"+email)){
+    alert("You already played"); return;
   }
 
   localStorage.setItem("name", name);
   localStorage.setItem("email", email);
-  localStorage.setItem("played_"+email, today);
+  localStorage.setItem("played_"+email, "yes");
 
-  location.href="quiz.html";
+  window.location.href = "./quiz.html";
 }
 </script>
+
+</body>
+</html>
