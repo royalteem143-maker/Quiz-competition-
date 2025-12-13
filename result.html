@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
-<body style="text-align:center; font-family:Arial">
+<body style="text-align:center">
 
-<h2>🎉 Test Completed</h2>
-
-<p id="result"></p>
+<h2>Result</h2>
+<p id="r"></p>
 
 <script>
-  const name = localStorage.getItem("studentName");
-  const score = localStorage.getItem("score");
-
-  document.getElementById("result").innerText =
-    name + ", your score is " + score;
+r.innerText=
+localStorage.getItem("name")+
+" | Score: "+
+localStorage.getItem("score");
 </script>
 
 </body>
