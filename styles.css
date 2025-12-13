@@ -1,3 +1,65 @@
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, sans-serif;
+  background:
+    linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)),
+    url("bg.jpg");
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+}
+
+/* ===== COMMON CARD ===== */
+.card{
+  background:rgba(255,255,255,0.12);
+  padding:30px;
+  border-radius:18px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.5);
+}
+
+/* ===== LOGIN ===== */
+input{
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  border-radius:8px;
+  border:none;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:none;
+  border-radius:25px;
+  background:#ff9800;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ===== QUIZ ===== */
+.quiz-card{
+  background:rgba(255,255,255,0.12);
+  padding:25px;
+  border-radius:20px;
+  width:95%;
+  max-width:650px;
+  box-shadow:0 20px 40px rgba(0,0,0,.5);
+}
+
 .quiz-header{
   display:flex;
   justify-content:space-between;
@@ -19,14 +81,21 @@
   border-radius:20px;
 }
 
-.question-text{
-  font-size:20px;
+#question{
+  font-size:22px;
   font-weight:600;
   margin-bottom:15px;
   line-height:1.4;
 }
 
-@media(max-width:480px){
-  .question-text{font-size:18px}
-  .timer{font-size:22px}
+.option-btn{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#ff9800;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
 }
