@@ -1,31 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Login</title>
-</head>
-<body style="text-align:center;font-family:Arial">
-
-<h2>Student Login</h2>
-
-<input id="name" placeholder="Full Name"><br><br>
-<input id="email" placeholder="Email"><br><br>
-
-<label>
-<input type="checkbox" id="agree"> I agree to Terms & Conditions
-</label><br><br>
-
-<button onclick="login()">Start Quiz</button>
-
 <script>
 function login(){
-  if(!name.value || !email.value) return alert("Fill all details");
-  if(!agree.checked) return alert("Accept T&C");
 
-  localStorage.setItem("name",name.value);
-  localStorage.setItem("email",email.value);
-  location.href="quiz.html";
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const agreeInput = document.getElementById("agree");
+
+  if(nameInput.value.trim() === "" || emailInput.value.trim() === ""){
+    alert("Fill all details");
+    return;
+  }
+
+  if(!agreeInput.checked){
+    alert("Accept Terms & Conditions");
+    return;
+  }
+
+  localStorage.setItem("name", nameInput.value.trim());
+  localStorage.setItem("email", emailInput.value.trim());
+
+  window.location.href = "quiz.html";
 }
 </script>
-
-</body>
-</html>
