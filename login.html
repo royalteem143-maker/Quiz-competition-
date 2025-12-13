@@ -1,23 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f2f2f2;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    .box{
+      background:#fff;
+      padding:25px;
+      width:320px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.2);
+      text-align:center;
+    }
+    input{
+      width:100%;
+      padding:10px;
+      margin:8px 0;
+    }
+    button{
+      padding:10px 20px;
+      margin-top:10px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Student Login</h2>
+
+  <input type="text" id="name" placeholder="Full Name">
+  <input type="email" id="email" placeholder="Email">
+
+  <label>
+    <input type="checkbox" id="agree">
+    I agree to Terms & Conditions
+  </label>
+
+  <br><br>
+
+  <!-- IMPORTANT: type="button" -->
+  <button type="button" onclick="login()">Start Quiz</button>
+</div>
+
 <script>
 function login(){
 
-  const nameInput = document.getElementById("name");
-  const emailInput = document.getElementById("email");
-  const agreeInput = document.getElementById("agree");
+  var name = document.getElementById("name").value.trim();
+  var email = document.getElementById("email").value.trim();
+  var agree = document.getElementById("agree").checked;
 
-  if(nameInput.value.trim() === "" || emailInput.value.trim() === ""){
+  if(name === "" || email === ""){
     alert("Fill all details");
     return;
   }
 
-  if(!agreeInput.checked){
+  if(!agree){
     alert("Accept Terms & Conditions");
     return;
   }
 
-  localStorage.setItem("name", nameInput.value.trim());
-  localStorage.setItem("email", emailInput.value.trim());
+  localStorage.setItem("name", name);
+  localStorage.setItem("email", email);
 
   window.location.href = "quiz.html";
 }
 </script>
+
+</body>
+</html>
