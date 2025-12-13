@@ -1,9 +1,16 @@
-const table = document.getElementById("leaderboard");
+const board = document.getElementById("board");
 let data = JSON.parse(localStorage.getItem("leaderboard")) || [];
-data.sort((a,b)=>b.score-a.score);
+
+// score high to low
+data.sort((a,b)=>b.score - a.score);
 
 data.forEach((u,i)=>{
-  const r=document.createElement("tr");
-  r.innerHTML=`<td>${i+1}</td><td>${u.name}</td><td>${u.score}</td>`;
-  table.appendChild(r);
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${i+1}</td>
+    <td>${u.name}</td>
+    <td>${u.dob}</td>
+    <td>${u.score}</td>
+  `;
+  board.appendChild(tr);
 });
