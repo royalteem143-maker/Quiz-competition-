@@ -1,52 +1,30 @@
-/* ===== GLOBAL ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #ffffff;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color: #fff;
 }
 
 .container {
-  max-width: 420px;
+  max-width: 450px;
   margin: auto;
   padding: 40px 20px;
   text-align: center;
 }
 
-/* ===== HEADINGS ===== */
-h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
+h1 { font-size: 26px; }
 
-h2 {
-  margin-top: 30px;
-}
-
-/* ===== TEXT ===== */
-p {
-  opacity: 0.9;
-}
-
-/* ===== BUTTON ===== */
 .btn {
   display: inline-block;
-  margin: 25px 0;
+  margin: 20px 0;
   padding: 15px 30px;
   background: #ff9800;
   color: #000;
   font-weight: bold;
   text-decoration: none;
   border-radius: 30px;
-  transition: 0.3s;
 }
 
-.btn:hover {
-  background: #ffc107;
-  transform: scale(1.05);
-}
-
-/* ===== TABLE ===== */
 table {
   width: 100%;
   margin-top: 20px;
@@ -58,7 +36,6 @@ th, td {
   border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
-/* ===== FOOTER ===== */
 .site-footer {
   margin-top: 40px;
   padding: 15px;
@@ -70,9 +47,4 @@ th, td {
 .site-footer a {
   color: #ffcc80;
   text-decoration: none;
-  margin: 0 5px;
-}
-
-.site-footer a:hover {
-  text-decoration: underline;
 }
