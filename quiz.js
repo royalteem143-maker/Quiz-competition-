@@ -1,42 +1,67 @@
-if(!localStorage.getItem("name")) location.href="login.html";
+if(!localStorage.getItem("name")){
+  location.href="login.html";
+}
 
-const questions=[
- {q:"भारत की राजधानी?",o:["दिल्ली","मुंबई","कोलकाता","चेन्नई"],a:0},
- {q:"2+2=?",o:["2","3","4","5"],a:2}
+const allQuestions = [
+ {q:"2 + 2 = ?", o:["2","3","4","5"], a:2},
+ {q:"India capital?", o:["Delhi","Mumbai","Kolkata","Chennai"], a:0},
+ {q:"5 × 2 = ?", o:["5","7","10","12"], a:2},
+ {q:"Sun rises from?", o:["North","South","East","West"], a:2},
+ {q:"10 ÷ 2 = ?", o:["2","5","10","20"], a:1}
 ];
 
-let i=0,score=0,time=10,t;
+// 🔀 shuffle
+const questions = allQuestions.sort(()=>0.5 - Math.random()).slice(0,3);
 
-function show(){
- let q=questions[i];
- box.innerHTML="<h3>"+q.q+"</h3>"+q.o.map((x,j)=>
- `<button onclick="ans(${j})">${x}</button><br>`).join("");
- start();
+let index = 0;
+let score = 0;
+let time = 10;
+let timer;
+
+const qBox = document.getElementById("question");
+const optBox = document.getElementById("options");
+const timerBox = document.getElementById("timer");
+
+function showQuestion(){
+  clearInterval(timer);
+  time = 10;
+  timerBox.innerText = time;
+
+  const q = questions[index];
+  qBox.innerText = q.q;
+  optBox.innerHTML = "";
+
+  q.o.forEach((opt,i)=>{
+    const btn = document.createElement("button");
+    btn.innerText = opt;
+    btn.className = "option-btn";
+    btn.onclick = ()=>answer(i);
+    optBox.appendChild(btn);
+  });
+
+  timer = setInterval(()=>{
+    time--;
+    timerBox.innerText = time;
+    if(time<=0){
+      next();
+    }
+  },1000);
 }
 
-function start(){
- time=10;
- timer.textContent=time;
- t=setInterval(()=>{
-  time--;
-  timer.textContent=time;
-  if(time<0) next();
- },1000);
-}
-
-function ans(x){
- if(x===questions[i].a) score++;
- next();
+function answer(i){
+  if(i === questions[index].a) score++;
+  next();
 }
 
 function next(){
- clearInterval(t);
- i++;
- if(i<questions.length) show();
- else{
-  localStorage.setItem("score",score);
-  location.href="result.html";
- }
+  clearInterval(timer);
+  index++;
+  if(index < questions.length){
+    showQuestion();
+  }else{
+    localStorage.setItem("score", score);
+    location.href="result.html";
+  }
 }
 
-show();
+showQuestion();
