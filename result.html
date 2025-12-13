@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <title>Result</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="center">
-
-<div class="card">
-  <h2>आपका परिणाम</h2>
-  <p id="res"></p>
-  <a class="btn" href="./index.html">Home</a>
-</div>
-
+<body>
+  <div class="box">
+    <h2>Your Score</h2>
+    <h1 id="s"></h1>
+    <a href="leaderboard.html">View Leaderboard</a>
+  </div>
 <script>
-document.getElementById("res").innerText =
-localStorage.getItem("name")+" | Score: "+localStorage.getItem("score");
+document.getElementById("s").innerText =
+  localStorage.getItem("score");
 </script>
-
 </body>
 </html>
